@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Colors
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+RESET=$(tput sgr0)
+BOLD=$(tput bold)
+DIM=$(tput dim)
+
+# Editor
+editors=("nvim" "vim" "vi" "emacs" "nano" "ed")
+for e in "${editors[@]}"; do
+	if [ "$(which "$e" 2>/dev/null)" ]; then EDITOR="$e" && break; fi
+done
+
+# Aliases
+alias 	la="ls -a"  \
+	ll="ls -l"  \
+	v="$EDITOR" \
+	e="$EDITOR" \
+	sv="sudo $EDITOR" \
+	se="sudo $EDITOR" \
+	SS="sudo systemctl" \
+	dc="docker-compose" \
+	:q="exit"
+
+# Prompt
+export PS1="\[${BOLD}\]\[${RED}\][\[${YELLOW}\]\u\[${GREEN}\]@\[${BLUE}\]\h \[${MAGENTA}\]\W\[${RED}\]]\[${WHITE}\]\\$ \[${RESET}\]"
+
+echo "${BOLD}${BLUE}en[v]eloppe successfully sourced.${RESET}"
